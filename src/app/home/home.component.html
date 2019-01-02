@@ -1,0 +1,10 @@
+<div style="text-align:center">
+  <h1>
+    Welcome!
+  </h1>
+</div>
+<ul>
+  <li class="text" *ngFor="let item of items | async">
+    {{item.name}}
+  </li>
+</ul>

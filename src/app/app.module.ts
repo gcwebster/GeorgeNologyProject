@@ -11,11 +11,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component';
 
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent}
+  { path: 'register', component: RegisterComponent},
+  { path: 'home', component: HomeComponent},
 ];
 
 @NgModule({
@@ -31,7 +33,7 @@ const appRoutes: Routes = [
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
     
   ],
-  declarations: [ AppComponent, LoginComponent, RegisterComponent ],
+  declarations: [ AppComponent, LoginComponent, RegisterComponent, HomeComponent ],
   bootstrap: [ AppComponent ]
 })
 
