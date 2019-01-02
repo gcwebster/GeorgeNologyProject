@@ -7,6 +7,8 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
+import { LoginComponent } from './login/login.component';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -15,7 +17,7 @@ import { environment } from '../environments/environment';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule // imports firebase/storage only needed for storage features
   ],
-  declarations: [ AppComponent ],
+  declarations: [ AppComponent, LoginComponent ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {}
