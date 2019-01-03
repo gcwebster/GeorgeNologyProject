@@ -19,6 +19,9 @@ export class HomeComponent implements OnInit {
   picture = '';
   rating: number;
   errorMessage = '';
+  
+  newImage = '';
+  errorUpdateImage = '';
 
   presents: Observable<any[]>;
   constructor(public db: AngularFirestore, public afAuth: AuthServiceService, public router: Router, public dbService: DatabaseService) {
@@ -28,6 +31,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.afAuth.user;
+    this.dbService.user = this.user;
   }
 
   logout(){
@@ -62,6 +66,16 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  updateProfilePicture(){
+    this.afAuth.setUserPhotoURL(this.user.displayName, this.newImage).then(()=>{
+      this.newImage = '';
+    })
+    .catch((error)=> {
+      this.errorUpdateImage = error.message;
+    })
+
+  }
+
   delete(id){
     this.dbService.deleteItem(id).catch((error) =>{
       console.error(error.message);
@@ -72,6 +86,10 @@ export class HomeComponent implements OnInit {
     this.dbService.updateLetterSent(present).catch((error) =>{
       console.error(error.message);
     });;
+  }
+
+  generateThankYouCards(){
+    this.router.navigate(['/letters']);
   }
 }
 

@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   email = '';
+  name = '';
   password = '';
   errorMessage = '';
 
@@ -23,6 +24,8 @@ export class RegisterComponent implements OnInit {
      * Using 'function' we cannot access this.email/password/errorMessage, using () => we can.
      */
     this.authService.registerUser(this.email, this.password).then(()=>{
+      this.authService.setUserDisplayName(this.name);
+      this.name = '';
       this.errorMessage = '';
       this.email = '';
       this.password = '';

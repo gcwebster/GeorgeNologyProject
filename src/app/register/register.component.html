@@ -8,11 +8,27 @@
   required
 >
 
+<label for="name">Name</label>
+<input
+  [(ngModel)]="name"
+  type="text"
+  id="name"
+  required
+>
+
 <label for="password">Password</label>
 <input
   [(ngModel)]="password"
   type="password"
   id="password"
+  required
+>
+
+<label for="confirmPassword">Confirm Password</label>
+<input
+  [(ngModel)]="confirmPassword"
+  type="password"
+  id="confirmPassword"
   required
 >
 

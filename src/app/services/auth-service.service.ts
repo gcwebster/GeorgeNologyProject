@@ -28,4 +28,12 @@ export class AuthServiceService {
     console.log('reset password reached');
     return this.afAuth.auth.sendPasswordResetEmail(email);
   }
+
+  setUserDisplayName(name: string){
+    return this.afAuth.auth.currentUser.updateProfile({displayName: name, photoURL: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'});
+  }
+
+  setUserPhotoURL(name: string, photoURL: string){
+    return this.afAuth.auth.currentUser.updateProfile({displayName: name, photoURL: photoURL});
+  }
 }

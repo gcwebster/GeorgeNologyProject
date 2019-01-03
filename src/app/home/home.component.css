@@ -1,3 +1,8 @@
-#error{
+.error{
     color: red;
+}
+
+.avatar{
+    height: 200px;
+    width: 200px;
 }

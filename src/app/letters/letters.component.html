@@ -1,0 +1,11 @@
+<ul>
+  <li class="text" *ngFor="let present of presents | async">
+    <div *ngIf="present.letterSent == false">
+    <p> Dear {{present.nameFrom}}, thank you for your gift of {{present.newItem}}, I really appreciated it! Hope we can catch up soon, all the best. With love {{present.nameTo}}</p>
+    
+
+    <button (click)='updateLetter(present)'>send card</button>
+    </div>
+
+  </li>
+</ul>

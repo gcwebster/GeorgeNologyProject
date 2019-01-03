@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+h1,
+p,
+label{
+    color: white;
+}
+
+body{
+    margin: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: red;
+    background-image: url('https://www.lifewire.com/thmb/VLGfrygP76OAzM9kzy_vobf8iwo=/1440x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/holidaylights2-585066293df78c491ed79062.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}

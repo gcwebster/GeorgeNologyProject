@@ -3,7 +3,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { map, timestamp } from 'rxjs/operators';
-import { userInfo } from 'os';
+import { AuthServiceService } from './auth-service.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 export interface iPresent{
   newItem: string;
@@ -13,7 +14,7 @@ export interface iPresent{
   rating: number;
   dateOpened: string;
   letterSent: boolean;
-  userID
+  userID: string;
 }
 
 @Injectable({
@@ -21,27 +22,24 @@ export interface iPresent{
 })
 
 export class DatabaseService {
-  private presentsCollection: AngularFirestoreCollection<iPresent>;
+  public user;
  
-  public presents: Observable<iPresent[]>;
- 
-  constructor(db: AngularFirestore) {
-    this.presentsCollection = db.collection<iPresent>('presents');
-    this.presents = this.presentsCollection.snapshotChanges().pipe(
+  constructor(public db: AngularFirestore, public authService: AuthServiceService) {  }
+
+  get presentsCollection(){
+    return this.db.collection<iPresent>('presents',
+    (ref) => ref.where('userID', '==', this.authService.user.uid)
+    );
+  }
+
+  get presents(){
+    return this.presentsCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as iPresent;
         const id = a.payload.doc.id;
         return { id, ... data };
       }))
     );
-  }
-
-  includeCollectionID(doChangeAction){
-    return doChangeAction.map((a)=> {
-      const data = a.payload.doc.data();
-      const id = a.payload.doc.id;
-      return { id, ...data };
-    })
   }
 
   createItem(newItem: string, nameFrom: string, nameTo: string, picture :string, rating: number, userID: string){

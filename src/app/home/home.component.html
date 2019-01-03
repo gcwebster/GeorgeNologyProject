@@ -1,8 +1,9 @@
 <div style="text-align:center">
   <h1>
     <!-- Without the ? when there is no user the welcome message will not display anything beyond the {{}} brackets (in this case an exclamation mark). -->
-    Welcome {{user?.email}}! {{user.uid}}
+    Welcome {{user?.email}}, {{user.displayName}}!
   </h1>
+  <img src={{user.photoURL}} class='avatar'>
 </div>
 <ul>
   <li class="text" *ngFor="let present of presents | async">
@@ -13,14 +14,10 @@
     <p>Rating: {{present.rating}}</p>
     <p>Opened on: {{present.dateOpened}}</p>
     <p>Thank you letter sent? {{present.letterSent}}</p>
-    <p>User ID: {{present.userID}}</p>
-    <p>Your ID: {{user.uid}}</p>
-
     <button (click)='updateLetter(present)'>send card</button>
     <button (click)='delete(present.id)' style="background-color: red; color: white">delete</button>
   </li>
 </ul>
-
 
 <label for="newItem">Item given</label>
 <input
@@ -60,8 +57,22 @@
 >
 
 <button (click)='createItem()'>Create item</button>
-<p *ngIf="errorMessage" id="error">{{errorMessage}}</p>
+<p *ngIf="errorMessage" class="error">{{errorMessage}}</p>
 
 <p>-----------</p>
 
 <button (click)='logout()'>logout</button>
+
+
+<label for="newImage">New Image</label>
+<input
+  [(ngModel)]='newImage'
+  type='string'
+  id = "newImage"
+>
+<img src={{newImage}} *ngIf='newImage' class='avatar'>
+<button (click)='updateProfilePicture()'>Update Image</button>
+<p *ngIf='errorUpdateImage' class='error'>{{errorUpdateImage}}</p>
+
+
+<button (click)='generateThankYouCards()'>Generate cards</button>
