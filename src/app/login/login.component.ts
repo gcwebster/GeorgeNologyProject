@@ -10,7 +10,12 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   email = '';
   password = '';
-  errorMessage = '';
+  errorMessageLogin = '';
+
+  forgottenPasswordEmail = '';
+  successResetPassword = '';
+  errorResetPassword = '';
+
 
   constructor(public authService: AuthServiceService, public router: Router) { }
 
@@ -19,13 +24,29 @@ export class LoginComponent implements OnInit {
 
   login(){
     this.authService.login(this.email, this.password).then(()=>{
-      this.errorMessage = '';
+      this.errorMessageLogin = '';
+      this.email='';
+      this.password='';
       this.router.navigate(['/home']);
     })
     .catch((error)=>{
-      this.errorMessage = error.message;
-      console.error(this.errorMessage);
+      this.errorMessageLogin = error.message;
+      console.error(this.errorMessageLogin);
     });
   }
 
+  resetPassword(){
+    this.authService.resetPassword(this.forgottenPasswordEmail).then(() => {
+      console.log('success');
+      this.successResetPassword = 'Password reset email successfully sent to ' + this.forgottenPasswordEmail + ' check your inbox (including spam folder).';
+      this.errorResetPassword = '';
+      this.forgottenPasswordEmail = '';
+    })
+    .catch((error)=>{
+      console.log('failure');
+      this.errorResetPassword = error.message;
+      this.successResetPassword = '';
+      this.forgottenPasswordEmail = '';
+    });
+  }
 }

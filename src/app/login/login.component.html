@@ -16,8 +16,19 @@
   required
 >
 
-<p *ngIf="errorMessage" id="error">{{errorMessage}}</p>
+<p *ngIf="errorMessageLogin" class="error">{{errorMessageLogin}}</p>
 
 <button (click)="login()">Login</button>
 
 <p>No account? Click here to <a href="/register">register</a></p>
+
+<input
+  [(ngModel)]="forgottenPasswordEmail"
+  type="email"
+  id="forgottenPasswordEmail"
+  required
+>
+<button (click)="resetPassword()">Reset password</button>
+<p *ngIf="successResetPassword" id="success">{{successResetPassword}}</p>
+<p *ngIf="errorResetPassword" class="error">{{errorResetPassword}}</p>
+
