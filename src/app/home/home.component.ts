@@ -14,6 +14,11 @@ export class HomeComponent implements OnInit {
 
   user;
   newItem = '';
+  nameFrom = '';
+  nameTo = '';
+  picture = '';
+  rating: number;
+  errorMessage = '';
 
   items: Observable<any[]>;
   constructor(public db: AngularFirestore, public afAuth: AuthServiceService, public router: Router, public dbService: DatabaseService) {
@@ -33,8 +38,29 @@ export class HomeComponent implements OnInit {
   }
 
   createItem(){
-    if(this.newItem != '')
-      this.dbService.createItem(this.newItem);
+    //If statement stops empty submission, try/catch bought in to allow for empty field error that isn't caught from firebase promise.
+    if(this.newItem != ''){
+      try{
+        this.dbService.createItem(this.newItem, this.nameFrom, this.nameTo, this.picture, this.rating).then(()=>{
+          this.newItem = '';
+          this.nameFrom = '';
+          this.nameTo = '';
+          this.picture = '';
+          this.rating= 0;
+          this.errorMessage = '';
+        })
+        .catch((error)=>{
+          this.errorMessage = error.message;
+          console.error(this.errorMessage);
+        });
+      }
+      catch (error){
+        if(error.message == "Function DocumentReference.set() called with invalid data. Unsupported field value: undefined (found in field rating)")
+          this.errorMessage = "You didn't fill out all the fields, double check they're all complete!"
+        else
+          this.errorMessage = error.message;
+      }
+    }
   }
 }
 

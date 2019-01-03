@@ -6,7 +6,13 @@
 </div>
 <ul>
   <li class="text" *ngFor="let item of items | async">
-    {{item.name}}
+    <p>Item given: {{item.newItem}}</p>
+    <p>From whom: {{item.nameFrom}}</p>
+    <p>To whom: {{item.nameTo}}</p>
+    <p>Picture: {{item.picture}}</p>
+    <p>Rating: {{item.rating}}</p>
+    <p>Opened on: {{item.dateOpened}}</p>
+    <p>Thank you letter sent? {{item.letterSent}}</p>
   </li>
 </ul>
 
@@ -14,8 +20,40 @@
 
 <p>-----------</p>
 
+<label for="newItem">Item given</label>
 <input
   [(ngModel)]='newItem'
   type='text'
+  id=newItem
 >
+
+<label for="nameFrom">From whom</label>
+<input
+  [(ngModel)]='nameFrom'
+  type='text'
+  id = "nameFrom"
+>
+
+<label for="nameTo">To whom</label>
+<input
+  [(ngModel)]='nameTo'
+  type='text'
+  id = "nameTo"
+>
+
+<label for="picture">Picture</label>
+<input
+  [(ngModel)]='picture'
+  type='text'
+  id = "picture"
+>
+
+<label for="rating">Rating</label>
+<input
+  [(ngModel)]='rating'
+  type='number'
+  id = "rating"
+>
+
 <button (click)='createItem()'>Create item</button>
+<p *ngIf="errorMessage" id="error">{{errorMessage}}</p>
