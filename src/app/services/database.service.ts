@@ -51,8 +51,6 @@ export class DatabaseService {
   }
 
   updateLetterSent(present){
-    console.log("currently: " + present.letterSent);
-    console.log("future: " + !(present.letterSent));
     return this.presentsCollection.doc(present.id).update({letterSent: !(present.letterSent)});
   }
 }

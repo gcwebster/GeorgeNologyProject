@@ -70,7 +70,9 @@ export class HomeComponent implements OnInit {
   }
 
   updateLetter(present){
-    this.dbService.updateLetterSent(present);
+    this.dbService.updateLetterSent(present).catch((error) =>{
+      console.error(error.message);
+    });;
   }
 }
 
