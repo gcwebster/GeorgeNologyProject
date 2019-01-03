@@ -1,7 +1,4 @@
-<p>
-  login works!
-</p>
-<p>No account? Click here to <a href="/register">register</a></p>
+<h1> login </h1>
 
 <label for="email">Email</label>
 <input
@@ -22,3 +19,5 @@
 <p *ngIf="errorMessage" id="error">{{errorMessage}}</p>
 
 <button (click)="login()">Login</button>
+
+<p>No account? Click here to <a href="/register">register</a></p>

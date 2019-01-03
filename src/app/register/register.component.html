@@ -1,7 +1,4 @@
-<p>
-  register works!
-</p>
-<p>Got an account? Click here to <a href="/login">login</a></p>
+<h1> register </h1>
 
 <label for="email">Email</label>
 <input
@@ -22,3 +19,5 @@
 <p *ngIf="errorMessage" id="error">{{errorMessage}}</p>
 
 <button (click)="createUser()">Register User</button>
+
+<p>Got an account? Click here to <a href="/login">login</a></p>
