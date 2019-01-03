@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AuthServiceService } from '../services/auth-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ export class HomeComponent implements OnInit {
   user;
 
   items: Observable<any[]>;
-  constructor(public db: AngularFirestore, public afAuth: AuthServiceService) {
+  constructor(public db: AngularFirestore, public afAuth: AuthServiceService, public router: Router) {
     this.items = db.collection('items').valueChanges();
     this.user = this.afAuth.user;
 
@@ -21,9 +22,13 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.afAuth.user;
-    console.error(this.user.email);
   }
 
+  logout(){
+    this.afAuth.logout().then(()=>{
+      this.router.navigate(['/login']);
+    });
+  }
 }
 
 
