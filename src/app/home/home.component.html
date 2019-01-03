@@ -13,7 +13,7 @@
     <p>Rating: {{present.rating}}</p>
     <p>Opened on: {{present.dateOpened}}</p>
     <p>Thank you letter sent? {{present.letterSent}}</p>
-    <p>Id: {{present.ref}}</p>
+    <p>ID: {{present.id}}</p>
   </li>
 </ul>
 
@@ -58,3 +58,12 @@
 
 <button (click)='createItem()'>Create item</button>
 <p *ngIf="errorMessage" id="error">{{errorMessage}}</p>
+
+<p>---------------</p>
+<label for="id">ID</label>
+<input
+  [(ngModel)]='id'
+  type='text'
+  id = "id"
+>
+<button (click)='deleteItem()'>Delete item</button>
