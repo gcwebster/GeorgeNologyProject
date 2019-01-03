@@ -2,3 +2,23 @@
   login works!
 </p>
 <p>No account? Click here to <a href="/register">register</a></p>
+
+<label for="email">Email</label>
+<input
+  [(ngModel)]="email"
+  type="email"
+  id="email"
+  required
+>
+
+<label for="password">Password</label>
+<input
+  [(ngModel)]="password"
+  type="password"
+  id="password"
+  required
+>
+
+<p *ngIf="errorMessage" id="error">{{errorMessage}}</p>
+
+<button (click)="login()">Login</button>

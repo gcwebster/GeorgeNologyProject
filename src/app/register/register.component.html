@@ -2,3 +2,23 @@
   register works!
 </p>
 <p>Got an account? Click here to <a href="/login">login</a></p>
+
+<label for="email">Email</label>
+<input
+  [(ngModel)]="email"
+  type="email"
+  id="email"
+  required
+>
+
+<label for="password">Password</label>
+<input
+  [(ngModel)]="password"
+  type="password"
+  id="password"
+  required
+>
+
+<p *ngIf="errorMessage" id="error">{{errorMessage}}</p>
+
+<button (click)="createUser()">Register User</button>
