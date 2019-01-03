@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AuthServiceService } from '../services/auth-service.service';
 import { Router } from '@angular/router';
+import { DatabaseService } from '../services/database.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ export class HomeComponent implements OnInit {
   user;
 
   items: Observable<any[]>;
-  constructor(public db: AngularFirestore, public afAuth: AuthServiceService, public router: Router) {
+  constructor(public db: AngularFirestore, public afAuth: AuthServiceService, public router: Router, public dbService: DatabaseService) {
     this.items = db.collection('items').valueChanges();
     this.user = this.afAuth.user;
 
@@ -28,6 +29,10 @@ export class HomeComponent implements OnInit {
     this.afAuth.logout().then(()=>{
       this.router.navigate(['/login']);
     });
+  }
+
+  createItem(){
+    this.dbService.createItem();
   }
 }
 

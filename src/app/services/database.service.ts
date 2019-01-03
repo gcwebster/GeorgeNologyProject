@@ -6,4 +6,8 @@ import { Injectable } from '@angular/core';
 export class DatabaseService {
 
   constructor() { }
+
+  createItem(){
+    console.log('Create item called');
+  }
 }
