@@ -21,20 +21,37 @@ export interface iPresent{
 export class DatabaseService {
   private presentsCollection: AngularFirestoreCollection<iPresent>;
  
-  private presents: Observable<iPresent[]>;
+  public presents: Observable<iPresent[]>;
  
   constructor(db: AngularFirestore) {
     this.presentsCollection = db.collection<iPresent>('presents');
- 
     this.presents = this.presentsCollection.snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data();
-          const id = a.payload.doc.id;
-          return { id, ...data };
-        });
-      })
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as iPresent;
+        const id = a.payload.doc.id;
+        return { id, ... data };
+      }))
     );
+
+
+    // this.presents = this.presentsCollection.snapshotChanges().pipe(
+    //   map(actions => {
+    //     return actions.map((a) => {
+    //       const data = a.payload.doc.data();
+    //       const id = a.payload.doc.id;
+    //       return { id, ...data };
+    //     });
+    //   })
+    // );
+
+  }
+
+  includeCollectionID(doChangeAction){
+    return doChangeAction.map((a)=> {
+      const data = a.payload.doc.data();
+      const id = a.payload.doc.id;
+      return { id, ...data };
+    })
   }
 
   createItem(newItem: string, nameFrom: string, nameTo: string, picture :string, rating: number){

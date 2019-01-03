@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
 
   presents: Observable<any[]>;
   constructor(public db: AngularFirestore, public afAuth: AuthServiceService, public router: Router, public dbService: DatabaseService) {
-    this.presents = db.collection('presents').valueChanges();
+    this.presents = dbService.presents;
     this.user = this.afAuth.user;
 
   }
@@ -64,11 +64,8 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  deleteItem(){
-    this.dbService.deleteItem(this.id).then(()=>{
-      this.id = '';
-    })
-    .catch((error) =>{
+  delete(id){
+    this.dbService.deleteItem(id).catch((error) =>{
       console.error(error.message);
     });
   }
