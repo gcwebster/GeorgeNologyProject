@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit {
   constructor(public db: AngularFirestore, public afAuth: AuthServiceService, public router: Router, public dbService: DatabaseService) {
     this.presents = dbService.presents;
     this.user = this.afAuth.user;
-
   }
 
   ngOnInit() {
@@ -41,7 +40,7 @@ export class HomeComponent implements OnInit {
     //If statement stops empty submission, try/catch bought in to allow for empty field error that isn't caught from firebase promise.
     if(this.newItem != ''){
       try{
-        this.dbService.createItem(this.newItem, this.nameFrom, this.nameTo, this.picture, this.rating).then(()=>{
+        this.dbService.createItem(this.newItem, this.nameFrom, this.nameTo, this.picture, this.rating, this.user.uid).then(()=>{
           this.newItem = '';
           this.nameFrom = '';
           this.nameTo = '';

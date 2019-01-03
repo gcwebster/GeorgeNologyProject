@@ -1,7 +1,7 @@
 <div style="text-align:center">
   <h1>
     <!-- Without the ? when there is no user the welcome message will not display anything beyond the {{}} brackets (in this case an exclamation mark). -->
-    Welcome {{user?.email}}!
+    Welcome {{user?.email}}! {{user.uid}}
   </h1>
 </div>
 <ul>
@@ -13,6 +13,9 @@
     <p>Rating: {{present.rating}}</p>
     <p>Opened on: {{present.dateOpened}}</p>
     <p>Thank you letter sent? {{present.letterSent}}</p>
+    <p>User ID: {{present.userID}}</p>
+    <p>Your ID: {{user.uid}}</p>
+
     <button (click)='updateLetter(present)'>send card</button>
     <button (click)='delete(present.id)' style="background-color: red; color: white">delete</button>
   </li>

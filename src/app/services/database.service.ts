@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
-import { map } from 'rxjs/operators';
+import { map, timestamp } from 'rxjs/operators';
+import { userInfo } from 'os';
 
 export interface iPresent{
   newItem: string;
@@ -12,6 +13,7 @@ export interface iPresent{
   rating: number;
   dateOpened: string;
   letterSent: boolean;
+  userID
 }
 
 @Injectable({
@@ -42,8 +44,14 @@ export class DatabaseService {
     })
   }
 
-  createItem(newItem: string, nameFrom: string, nameTo: string, picture :string, rating: number){
-    return this.presentsCollection.add({newItem: newItem, nameFrom: nameFrom, nameTo: nameTo, picture: picture, rating: rating, dateOpened: "today", letterSent: false}).catch((error) => { console.error("THIS IS AN IMPORTANT ERROR " + error.message)});
+  createItem(newItem: string, nameFrom: string, nameTo: string, picture :string, rating: number, userID: string){
+    let today = new Date();
+    let date = today.getDate() + "/" +  (today.getMonth() + 1) + "/" + today.getFullYear();
+    console.log("user id is " + userID);
+    return this.presentsCollection.add({newItem: newItem, nameFrom: nameFrom, nameTo: nameTo, picture: picture, rating: rating, dateOpened: date, letterSent: false, userID: userID})
+    .catch((error) => {
+       console.error(error.message);
+    });
   }
 
   deleteItem(id){
