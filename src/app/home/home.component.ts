@@ -13,6 +13,7 @@ import { DatabaseService } from '../services/database.service';
 export class HomeComponent implements OnInit {
 
   user;
+  newItem = '';
 
   items: Observable<any[]>;
   constructor(public db: AngularFirestore, public afAuth: AuthServiceService, public router: Router, public dbService: DatabaseService) {
@@ -32,7 +33,8 @@ export class HomeComponent implements OnInit {
   }
 
   createItem(){
-    this.dbService.createItem();
+    if(this.newItem != '')
+      this.dbService.createItem(this.newItem);
   }
 }
 

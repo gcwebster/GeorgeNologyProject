@@ -7,7 +7,7 @@ export class DatabaseService {
 
   constructor() { }
 
-  createItem(){
-    console.log('Create item called');
+  createItem(newItem){
+    console.log('Create item called with ' + newItem);
   }
 }
