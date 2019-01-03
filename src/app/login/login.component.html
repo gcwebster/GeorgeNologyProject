@@ -20,7 +20,7 @@
 
 <button (click)="login()">Login</button>
 
-<p>No account? Click here to <a href="/register">register</a></p>
+<p>----------------------</p>
 
 <input
   [(ngModel)]="forgottenPasswordEmail"
@@ -32,3 +32,4 @@
 <p *ngIf="successResetPassword" id="success">{{successResetPassword}}</p>
 <p *ngIf="errorResetPassword" class="error">{{errorResetPassword}}</p>
 
+<p>No account? Click here to <a href="/register">register</a></p>
