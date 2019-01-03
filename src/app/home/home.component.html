@@ -5,14 +5,15 @@
   </h1>
 </div>
 <ul>
-  <li class="text" *ngFor="let item of items | async">
-    <p>Item given: {{item.newItem}}</p>
-    <p>From whom: {{item.nameFrom}}</p>
-    <p>To whom: {{item.nameTo}}</p>
-    <p>Picture: {{item.picture}}</p>
-    <p>Rating: {{item.rating}}</p>
-    <p>Opened on: {{item.dateOpened}}</p>
-    <p>Thank you letter sent? {{item.letterSent}}</p>
+  <li class="text" *ngFor="let present of presents | async">
+    <p>Item given: {{present.newItem}}</p>
+    <p>From whom: {{present.nameFrom}}</p>
+    <p>To whom: {{present.nameTo}}</p>
+    <p>Picture: {{present.picture}}</p>
+    <p>Rating: {{present.rating}}</p>
+    <p>Opened on: {{present.dateOpened}}</p>
+    <p>Thank you letter sent? {{present.letterSent}}</p>
+    <p>Id: {{present.ref}}</p>
   </li>
 </ul>
 

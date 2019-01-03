@@ -19,14 +19,14 @@ export interface iPresent{
 })
 
 export class DatabaseService {
-  private itemsCollection: AngularFirestoreCollection<iPresent>;
+  private presentsCollection: AngularFirestoreCollection<iPresent>;
  
-  private items: Observable<iPresent[]>;
+  private presents: Observable<iPresent[]>;
  
   constructor(db: AngularFirestore) {
-    this.itemsCollection = db.collection<iPresent>('items');
+    this.presentsCollection = db.collection<iPresent>('presents');
  
-    this.items = this.itemsCollection.snapshotChanges().pipe(
+    this.presents = this.presentsCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
           const data = a.payload.doc.data();
@@ -38,6 +38,10 @@ export class DatabaseService {
   }
 
   createItem(newItem: string, nameFrom: string, nameTo: string, picture :string, rating: number){
-    return this.itemsCollection.add({newItem: newItem, nameFrom: nameFrom, nameTo: nameTo, picture: picture, rating: rating, dateOpened: "today", letterSent: false}).catch((error) => { console.error("THIS IS AN IMPORTANT ERROR " + error.message)});
+    return this.presentsCollection.add({newItem: newItem, nameFrom: nameFrom, nameTo: nameTo, picture: picture, rating: rating, dateOpened: "today", letterSent: false}).catch((error) => { console.error("THIS IS AN IMPORTANT ERROR " + error.message)});
+  }
+
+  deleteItem(id){
+    return this.presentsCollection.doc(id).delete();
   }
 }

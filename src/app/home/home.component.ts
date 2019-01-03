@@ -20,9 +20,9 @@ export class HomeComponent implements OnInit {
   rating: number;
   errorMessage = '';
 
-  items: Observable<any[]>;
+  presents: Observable<any[]>;
   constructor(public db: AngularFirestore, public afAuth: AuthServiceService, public router: Router, public dbService: DatabaseService) {
-    this.items = db.collection('items').valueChanges();
+    this.presents = db.collection('presents').valueChanges();
     this.user = this.afAuth.user;
 
   }
@@ -61,6 +61,10 @@ export class HomeComponent implements OnInit {
           this.errorMessage = error.message;
       }
     }
+  }
+
+  deleteItem(){
+    this.dbService.deleteItem(7);
   }
 }
 
