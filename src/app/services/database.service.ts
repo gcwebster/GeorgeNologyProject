@@ -32,18 +32,6 @@ export class DatabaseService {
         return { id, ... data };
       }))
     );
-
-
-    // this.presents = this.presentsCollection.snapshotChanges().pipe(
-    //   map(actions => {
-    //     return actions.map((a) => {
-    //       const data = a.payload.doc.data();
-    //       const id = a.payload.doc.id;
-    //       return { id, ...data };
-    //     });
-    //   })
-    // );
-
   }
 
   includeCollectionID(doChangeAction){
@@ -60,5 +48,11 @@ export class DatabaseService {
 
   deleteItem(id){
     return this.presentsCollection.doc(id).delete();
+  }
+
+  updateLetterSent(present){
+    console.log("currently: " + present.letterSent);
+    console.log("future: " + !(present.letterSent));
+    return this.presentsCollection.doc(present.id).update({letterSent: !(present.letterSent)});
   }
 }

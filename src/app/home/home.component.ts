@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit {
   picture = '';
   rating: number;
   errorMessage = '';
-  id = '';
 
   presents: Observable<any[]>;
   constructor(public db: AngularFirestore, public afAuth: AuthServiceService, public router: Router, public dbService: DatabaseService) {
@@ -68,6 +67,10 @@ export class HomeComponent implements OnInit {
     this.dbService.deleteItem(id).catch((error) =>{
       console.error(error.message);
     });
+  }
+
+  updateLetter(present){
+    this.dbService.updateLetterSent(present);
   }
 }
 
