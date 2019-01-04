@@ -1,21 +1,33 @@
 <div style="text-align:center">
-  <h1>
-    <!-- Without the ? when there is no user the welcome message will not display anything beyond the {{}} brackets (in this case an exclamation mark). -->
-    Welcome {{user.displayName}}!
-  </h1>
-  <button (click)='logout()'>logout</button>
-  <img src={{user.photoURL}} class='avatar'>
+  <div id='profileBar'>
+    <h1>
+      <!-- Without the ? when there is no user the welcome message will not display anything beyond the {{}} brackets (in this case an exclamation mark). -->
+      Welcome {{user.displayName}}!
+    </h1>
+    <img src={{user.photoURL}} id='avatar' (click)='accessProfilePictureChange()'>
+    <button (click)='logout()' id='logoutButton'>logout</button>
+  </div>
+  
+  <div id='dirtyMarginFix'></div>
 
-  <label for="newImage">New profile picture</label>
-  <input
-    [(ngModel)]='newImage'
-    type='string'
-    id = "newImage"
-  >
-  <img *ngIf='newImage' src={{newImage}} class='avatar'>
-  <button (click)='updateProfilePicture()'>Update Image</button>
-  <p *ngIf='errorUpdateImage' class='error'>{{errorUpdateImage}}</p>
+  <div id="newImage" class='{{avatarClicked ? "" : "hidden"}}'>
+     <div id="close">
+        <p style='background-color: red; color: white; float: right' (click)="accessProfilePictureChange()">X</p>
+      </div>
+    <label for="newImage">New profile picture URL:</label>
+    <input
+      [(ngModel)]='newImage'
+      type='string'
+      id = "newImage"
+    >
+    <img *ngIf='newImage' src={{newImage}} id='avatarPreview'>
+    <button (click)='updateProfilePicture()'>Update Image</button>
+   
+    <p *ngIf='errorUpdateImage' class='error'>{{errorUpdateImage}}</p>
+  </div>
 </div>
+
+<h2>Your recorded gifts are:</h2>
 <div id="present" *ngFor="let present of presents | async">
   <p>Gift: {{present.newItem}}</p>
   <p>From: {{present.nameFrom}}</p>
@@ -23,9 +35,9 @@
   <img src='{{present.picture}}' id="giftPicture">
   <p>Rating: {{present.rating}}/5</p>
   <p>Opened on: {{present.dateOpened}}</p>
-  <p>You have {{present.letterSent? '': 'NOT'}} sent a thank you card!</p>
-  <button (click)='updateLetter(present)'>send card</button>
-  <button (click)='delete(present.id)' style="background-color: red; color: white">delete</button>
+  <p>You have {{present.letterSent ? '': 'NOT'}} sent a thank you card!</p>
+  <button (click)='updateLetter(present)' class='{{present.letterSent ? "grey" : "" }}'>{{present.letterSent?"Card sent &#11119;":"Send card"}}</button>
+  <button (click)='delete(present.id)' style="background-color: red; color: white">Delete present</button>
 </div>
 
 <h2>Add a new present</h2>
