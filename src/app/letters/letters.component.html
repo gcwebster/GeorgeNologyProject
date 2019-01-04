@@ -1,11 +1,30 @@
-<ul>
-  <li class="text" *ngFor="let present of presents | async">
-    <div *ngIf="present.letterSent == false">
-    <p> Dear {{present.nameFrom}}, thank you for your gift of {{present.newItem}}, I really appreciated it! Hope we can catch up soon, all the best. With love {{present.nameTo}}</p>
-    
+<div id="homeButton">
+  <a href='/home'><button>Return home</button></a>
+</div>
 
-    <button (click)='updateLetter(present)'>send card</button>
+
+<div *ngFor="let present of presents | async">
+  <div *ngIf="present.letterSent == false">
+    <div class="card">
+      <div id='cardFace'>
+        <div>
+          <img src='{{getCardFace()}}'>
+        </div>
+      </div>
+
+      <div id='cardContent'>
+        <div style="display: table; height: 500px;">
+            <div style="display: table-cell; vertical-align: middle;">
+              <div>
+              <h1> Dear {{present.nameFrom}},</h1>
+              <p>Thank you for your gift of {{present.newItem}}!</p>
+              <p>I really appreciated it!</p>
+              <p>Hope we can catch up soon, all the best.</p>
+              <h2>With love, {{present.nameTo}}</h2>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-  </li>
-</ul>
+  </div>
+</div>

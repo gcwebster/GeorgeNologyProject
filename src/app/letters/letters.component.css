@@ -1,3 +1,33 @@
-ul{
-    list-style: none;
+.card{
+    height: 500px;
+    margin-top: 10px;
+    background-color: white;
+}
+
+#cardFace,
+#cardContent{
+    width:50%;
+    height: 100%;
+    display: inline-block;
+    border: 1px solid black;
+}
+
+#cardFace{
+    background-color: yellow;
+}
+
+img{
+    width: 100%;
+    height: 500px;
+}
+
+h1,
+h2,
+p {
+    color: red;
+    margin: 30px 10px;
+}
+
+#homeButton{
+    text-align: center;
 }
