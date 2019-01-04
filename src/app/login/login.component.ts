@@ -22,31 +22,31 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-  toggleResetPasswordField(){
+  toggleResetPasswordField() {
     this.canSeeResetPassword = !this.canSeeResetPassword;
   }
 
-  login(){
-    this.authService.login(this.email, this.password).then(()=>{
+  login() {
+    this.authService.login(this.email, this.password).then(() => {
       this.errorMessageLogin = '';
-      this.email='';
-      this.password='';
+      this.email = '';
+      this.password = '';
       this.router.navigate(['/home']);
     })
-    .catch((error)=>{
+    .catch((error) => {
       this.errorMessageLogin = error.message;
       console.error(this.errorMessageLogin);
     });
   }
 
-  resetPassword(){
+  resetPassword() {
     this.authService.resetPassword(this.forgottenPasswordEmail).then(() => {
       console.log('success');
       this.successResetPassword = 'Password reset email successfully sent to ' + this.forgottenPasswordEmail + ' check your inbox (including spam folder).';
       this.errorResetPassword = '';
       this.forgottenPasswordEmail = '';
     })
-    .catch((error)=>{
+    .catch((error) => {
       console.log('failure');
       this.errorResetPassword = error.message;
       this.successResetPassword = '';

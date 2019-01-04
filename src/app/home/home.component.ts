@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   picture = '';
   rating: number;
   errorMessage = '';
-  
+
   newImage = '';
   errorUpdateImage = '';
 
@@ -35,76 +35,75 @@ export class HomeComponent implements OnInit {
     this.dbService.user = this.user;
   }
 
-  accessProfilePictureChange(){
+  accessProfilePictureChange() {
     this.avatarClicked = !this.avatarClicked;
     this.newImage = '';
   }
-  logout(){
-    this.afAuth.logout().then(()=>{
+  logout() {
+    this.afAuth.logout().then(() => {
       this.router.navigate(['/login']);
     });
   }
 
-  createItem(){
-    //If statement stops empty submission, try/catch bought in to allow for empty field error that isn't caught from firebase promise.
-    if(this.newItem != '' && this.nameFrom != '' && this.nameTo != '' && this.picture != ''){
-      if(this.picture.indexOf('http') != -1){
-        try{
-          this.dbService.createItem(this.newItem, this.nameFrom, this.nameTo, this.picture, this.rating, this.user.uid).then(()=>{
+  createItem() {
+    // If statement stops empty submission, try/catch bought in to allow for empty field error that isn't caught from firebase promise.
+    if (this.newItem != '' && this.nameFrom != '' && this.nameTo != '' && this.picture != '') {
+      if (this.picture.indexOf('http') != -1) {
+        try {
+          this.dbService.createItem(this.newItem, this.nameFrom, this.nameTo, this.picture, this.rating, this.user.uid).then(() => {
             this.newItem = '';
             this.nameFrom = '';
             this.nameTo = '';
             this.picture = '';
-            this.rating= 0;
+            this.rating = 0;
             this.errorMessage = '';
           })
-          .catch((error)=>{
+          .catch((error) => {
             this.errorMessage = error.message;
             console.error(this.errorMessage);
           });
-        }
-        catch (error){
+        } catch (error) {
           this.errorMessage = error.message;
         }
-      }
-      else
+      } else {
         this.errorMessage = 'This isn\'t a valid URL, make sure it starts with "http" or "https"';
+      }
+    } else {
+      this.errorMessage = 'You didn\'t fill out all the fields, double check they\'re all complete!';
     }
-    else
-      this.errorMessage = "You didn't fill out all the fields, double check they're all complete!";
   }
 
-  updateProfilePicture(){
-    if(this.newImage.indexOf('http') != -1){
-      this.afAuth.setUserPhotoURL(this.user.displayName, this.newImage).then(()=>{
+  updateProfilePicture() {
+    if (this.newImage.indexOf('http') != -1) {
+      this.afAuth.setUserPhotoURL(this.user.displayName, this.newImage).then(() => {
         this.newImage = '';
         this.errorUpdateImage = '';
       })
-      .catch((error)=> {
+      .catch((error) => {
         this.errorUpdateImage = error.message;
-      })
-    }
-    else
+      });
+    } else {
       this.errorUpdateImage = 'This isn\'t a valid URL, make sure it starts with "http" or "https"';
+    }
 
   }
 
-  delete(id){
-    this.dbService.deleteItem(id).catch((error) =>{
+  delete(id) {
+    this.dbService.deleteItem(id).catch((error) => {
       console.error(error.message);
     });
   }
 
-  updateLetter(present){
-    this.dbService.updateLetterSent(present).catch((error) =>{
+  updateLetter(present) {
+    this.dbService.updateLetterSent(present).catch((error) => {
       console.error(error.message);
-    });;
+    });
   }
 
-  generateThankYouCards(){
+  generateThankYouCards() {
     this.router.navigate(['/letters']);
   }
 }
 
 
-  
+

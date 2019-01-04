@@ -18,12 +18,12 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  createUser(){
+  createUser() {
     /**
      * IMPORTANT!
      * Using 'function' we cannot access this.email/password/errorMessage, using () => we can.
      */
-    this.authService.registerUser(this.email, this.password).then(()=>{
+    this.authService.registerUser(this.email, this.password).then(() => {
       this.authService.setUserDisplayName(this.name);
       this.name = '';
       this.errorMessage = '';
@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
       this.password = '';
       this.router.navigate(['/home']);
     })
-    .catch((error)=>{
+    .catch((error) => {
       this.errorMessage = error.message;
       console.error(this.errorMessage);
     });
