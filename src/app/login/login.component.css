@@ -2,12 +2,11 @@
     width:80%;
     height: 50%;
 
-    position:absolute; /*it can be fixed too*/
+    position:absolute;
     left:0; right:0;
     top:0; bottom:0;
     margin:auto;
 
-    /*this to solve "the content will not be cut when the window is smaller than the content": */
     max-width:100%;
     max-height:100%;
     overflow:auto;
@@ -43,4 +42,30 @@ a{
 }
 #success{
     color: green;
+}
+
+#resetPasswordSection{
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+#showForgottenPassworFieldContainer{
+    padding: 10px 0;
+}
+
+#showPasswordResetField{
+    text-decoration: underline;
+    color: yellow;
+    cursor: pointer;
+}
+
+#close{
+    cursor: hover;
+    background-color: red;
+    float: right;
+    padding: 5px;
+}
+
+.hidden{
+    display: none;
+    padding: 500px;
 }

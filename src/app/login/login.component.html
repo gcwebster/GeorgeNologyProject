@@ -25,21 +25,29 @@
 
   <button (click)="login()">Login</button>
 
-  <p>----------------------</p>
+  <div id="showForgottenPassworFieldContainer">
+    <p>Forgotten your password? click <span id="showPasswordResetField" (click)='toggleResetPasswordField()'>here</span>.</p>
+  </div>
+  <div id="resetPasswordSection" class='{{canSeeResetPassword ? "" : "hidden" }}'>
 
-  <div>
-    <input
-      [(ngModel)]="forgottenPasswordEmail"
-      type="email"
-      id="forgottenPasswordEmail"
-      required
-    >
+    <p id='close' (click)='toggleResetPasswordField()'>x</p>
+    <p>----------------------</p>
+  
+    <div>
+      <p>Enter your email address below, we will send you a link to reset it.</p>
+      <input
+        [(ngModel)]="forgottenPasswordEmail"
+        type="email"
+        id="forgottenPasswordEmail"
+        required
+      >
+    </div>
+    <div>
+      <button (click)="resetPassword()" id="resetPassword">Reset password</button>
+    </div>
+    <p *ngIf="successResetPassword" id="success">{{successResetPassword}}</p>
+    <p *ngIf="errorResetPassword" class="error">{{errorResetPassword}}</p>
   </div>
-  <div>
-    <button (click)="resetPassword()" id="resetPassword">Reset password</button>
-  </div>
-  <p *ngIf="successResetPassword" id="success">{{successResetPassword}}</p>
-  <p *ngIf="errorResetPassword" class="error">{{errorResetPassword}}</p>
 
   <p>No account? Click here to <a href="/register">register</a></p>
 </div>

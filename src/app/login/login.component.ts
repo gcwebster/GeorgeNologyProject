@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  canSeeResetPassword = false ;
   email = '';
   password = '';
   errorMessageLogin = '';
@@ -20,6 +21,9 @@ export class LoginComponent implements OnInit {
   constructor(public authService: AuthServiceService, public router: Router) { }
 
   ngOnInit() {
+  }
+  toggleResetPasswordField(){
+    this.canSeeResetPassword = !this.canSeeResetPassword;
   }
 
   login(){
