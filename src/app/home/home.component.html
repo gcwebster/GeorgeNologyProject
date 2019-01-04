@@ -3,7 +3,18 @@
     <!-- Without the ? when there is no user the welcome message will not display anything beyond the {{}} brackets (in this case an exclamation mark). -->
     Welcome {{user.displayName}}!
   </h1>
+  <button (click)='logout()'>logout</button>
   <img src={{user.photoURL}} class='avatar'>
+
+  <label for="newImage">New profile picture</label>
+  <input
+    [(ngModel)]='newImage'
+    type='string'
+    id = "newImage"
+  >
+  <img *ngIf='newImage' src={{newImage}} class='avatar'>
+  <button (click)='updateProfilePicture()'>Update Image</button>
+  <p *ngIf='errorUpdateImage' class='error'>{{errorUpdateImage}}</p>
 </div>
 <div id="present" *ngFor="let present of presents | async">
   <p>Gift: {{present.newItem}}</p>
@@ -70,18 +81,6 @@
 
 <p>-----------</p>
 
-<button (click)='logout()'>logout</button>
 
-
-<label for="newImage">New Image</label>
-<input
-  [(ngModel)]='newImage'
-  type='string'
-  id = "newImage"
->
-<img *ngIf='newImage' src={{newImage}} class='avatar'>
-<button (click)='updateProfilePicture()'>Update Image</button>
-<p *ngIf='errorUpdateImage' class='error'>{{errorUpdateImage}}</p>
-
-
+<p>Added all of your gifts? Don't forget to send those thank you cards!</p>
 <button (click)='generateThankYouCards()' id="generateThankYouCards">Generate cards</button>
