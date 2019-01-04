@@ -1,60 +1,69 @@
 <div style="text-align:center">
   <h1>
     <!-- Without the ? when there is no user the welcome message will not display anything beyond the {{}} brackets (in this case an exclamation mark). -->
-    Welcome {{user?.email}}, {{user.displayName}}!
+    Welcome {{user.displayName}}!
   </h1>
   <img src={{user.photoURL}} class='avatar'>
 </div>
-<ul>
-  <li class="text" *ngFor="let present of presents | async">
-    <p>Item given: {{present.newItem}}</p>
-    <p>From whom: {{present.nameFrom}}</p>
-    <p>To whom: {{present.nameTo}}</p>
-    <p>Picture: {{present.picture}}</p>
-    <p>Rating: {{present.rating}}</p>
-    <p>Opened on: {{present.dateOpened}}</p>
-    <p>Thank you letter sent? {{present.letterSent}}</p>
-    <button (click)='updateLetter(present)'>send card</button>
-    <button (click)='delete(present.id)' style="background-color: red; color: white">delete</button>
-  </li>
-</ul>
+<div id="present" *ngFor="let present of presents | async">
+  <p>Gift: {{present.newItem}}</p>
+  <p>From: {{present.nameFrom}}</p>
+  <p>To: {{present.nameTo}}</p>
+  <img src='{{present.picture}}' id="giftPicture">
+  <p>Rating: {{present.rating}}/5</p>
+  <p>Opened on: {{present.dateOpened}}</p>
+  <p>You have {{present.letterSent? '': 'NOT'}} sent a thank you card!</p>
+  <button (click)='updateLetter(present)'>send card</button>
+  <button (click)='delete(present.id)' style="background-color: red; color: white">delete</button>
+</div>
 
-<label for="newItem">Item given</label>
-<input
-  [(ngModel)]='newItem'
-  type='text'
-  id=newItem
->
+<h2>Add a new present</h2>
+<div>
+  <label for="newItem">Item given</label>
+  <input
+    [(ngModel)]='newItem'
+    type='text'
+    id=newItem
+  >
+</div>
 
-<label for="nameFrom">From whom</label>
-<input
-  [(ngModel)]='nameFrom'
-  type='text'
-  id = "nameFrom"
->
+<div>
+  <label for="nameFrom">From whom</label>
+  <input
+    [(ngModel)]='nameFrom'
+    type='text'
+    id = "nameFrom"
+  >
+</div>
 
-<label for="nameTo">To whom</label>
-<input
-  [(ngModel)]='nameTo'
-  type='text'
-  id = "nameTo"
->
+<div>
+  <label for="nameTo">To whom</label>
+  <input
+    [(ngModel)]='nameTo'
+    type='text'
+    id = "nameTo"
+  >
+</div>
 
-<label for="picture">Picture</label>
-<input
-  [(ngModel)]='picture'
-  type='text'
-  id = "picture"
->
+<div>
+  <label for="picture">Picture URL</label>
+  <input
+    [(ngModel)]='picture'
+    type='text'
+    id = "picture"
+  >
+</div>
 
-<label for="rating">Rating</label>
-<input
-  [(ngModel)]='rating'
-  type='number'
-  id = "rating"
-  min=0
-  max=5
->
+<div>
+  <label for="rating">Rating (0-5)</label>
+  <input
+    [(ngModel)]='rating'
+    type='number'
+    id = "rating"
+    min=0
+    max=5
+  >
+</div>
 
 <button (click)='createItem()'>Create item</button>
 <p *ngIf="errorMessage" class="error">{{errorMessage}}</p>
@@ -70,9 +79,9 @@
   type='string'
   id = "newImage"
 >
-<img src={{newImage}} *ngIf='newImage' class='avatar'>
+<img *ngIf='newImage' src={{newImage}} class='avatar'>
 <button (click)='updateProfilePicture()'>Update Image</button>
 <p *ngIf='errorUpdateImage' class='error'>{{errorUpdateImage}}</p>
 
 
-<button (click)='generateThankYouCards()'>Generate cards</button>
+<button (click)='generateThankYouCards()' id="generateThankYouCards">Generate cards</button>

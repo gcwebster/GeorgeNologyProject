@@ -6,6 +6,7 @@
 }
 
 h1,
+h2,
 p,
 label{
     color: white;
@@ -19,4 +20,12 @@ body{
     background-image: url('https://www.lifewire.com/thmb/VLGfrygP76OAzM9kzy_vobf8iwo=/1440x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/holidaylights2-585066293df78c491ed79062.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    overflow-x: hidden;
+}
+
+button{
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #41c400;
+    color: white;
 }

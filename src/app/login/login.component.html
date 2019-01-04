@@ -1,35 +1,45 @@
-<h1> login </h1>
+<div class="container">
+  <h1>Login</h1>
 
-<label for="email">Email</label>
-<input
-  [(ngModel)]="email"
-  type="email"
-  id="email"
-  required
->
+  <div>
+    <label for="email">Email</label>
+    <input
+      [(ngModel)]="email"
+      type="email"
+      id="email"
+      required
+    >
+  </div>
 
-<label for="password">Password</label>
-<input
-  [(ngModel)]="password"
-  type="password"
-  id="password"
-  required
->
+  <div>
+    <label for="password">Password</label>
+    <input
+      [(ngModel)]="password"
+      type="password"
+      id="password"
+      required
+    >
+  </div>
 
-<p *ngIf="errorMessageLogin" class="error">{{errorMessageLogin}}</p>
+  <p *ngIf="errorMessageLogin" class="error">{{errorMessageLogin}}</p>
 
-<button (click)="login()">Login</button>
+  <button (click)="login()">Login</button>
 
-<p>----------------------</p>
+  <p>----------------------</p>
 
-<input
-  [(ngModel)]="forgottenPasswordEmail"
-  type="email"
-  id="forgottenPasswordEmail"
-  required
->
-<button (click)="resetPassword()">Reset password</button>
-<p *ngIf="successResetPassword" id="success">{{successResetPassword}}</p>
-<p *ngIf="errorResetPassword" class="error">{{errorResetPassword}}</p>
+  <div>
+    <input
+      [(ngModel)]="forgottenPasswordEmail"
+      type="email"
+      id="forgottenPasswordEmail"
+      required
+    >
+  </div>
+  <div>
+    <button (click)="resetPassword()" id="resetPassword">Reset password</button>
+  </div>
+  <p *ngIf="successResetPassword" id="success">{{successResetPassword}}</p>
+  <p *ngIf="errorResetPassword" class="error">{{errorResetPassword}}</p>
 
-<p>No account? Click here to <a href="/register">register</a></p>
+  <p>No account? Click here to <a href="/register">register</a></p>
+</div>
